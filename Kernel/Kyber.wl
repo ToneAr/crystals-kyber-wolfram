@@ -1,15 +1,14 @@
-PATH = (
-	FileNames[
-		"*.wl",
-		FileNameJoin[{ PacletObject["ToneAr/Kyber"]["Location"], "Kernel", "Source" }],
-		Infinity
-	]
-	// Map[FileBaseName]
-	// Map["Source`"<>#<>"`"&]
-);
+PATH =
+	(
+		FileNames[
+			"*.wl",
+			FileNameJoin[
+				{PacletObject["ToneAr/Kyber"]["Location"], "Kernel", "Source"}
+			],
+			Infinity
+		] //
+			Map[FileBaseName] //
+			Map[StringJoin[ "Source`", #, "`"]&]
+	);
 
-Get["ToneAr`Kyber`" <> #]& /@ {
-	"Public`",
-	"Private`",
-	Splice[ PATH ]
-};
+Get[StringJoin[ "ToneAr`Kyber`", #]]& /@ {"Public`", "Private`", Splice[PATH]};
